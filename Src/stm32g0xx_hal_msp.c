@@ -143,10 +143,13 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
     PA1     ------> ADC1_IN1
     PA2     ------> ADC1_IN2
     PA3     ------> ADC1_IN3
-    PA4     ------> ADC1_IN4 
+    PA4     ------> ADC1_IN4
+    PA5     ------> ADC1_IN5
+    PA6     ------> ADC1_IN6
+    PA7     ------> ADC1_IN7 
     */
-    GPIO_InitStruct.Pin = Cell_4S_ADC_Pin|Cell_3S_ADC_Pin|Cell_2S_ADC_Pin|Cell_1S_ADC_Pin 
-                          |BAT_ADC_Pin;
+    GPIO_InitStruct.Pin = Thermistor_1_ADC_Pin|Thermistor_2_ADC_Pin|Cell_1S_ADC_Pin|Cell_2S_ADC_Pin 
+                          |Cell_3S_ADC_Pin|Cell_4S_ADC_Pin|BAT_ADC_Pin|OS_ADC_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -200,10 +203,13 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
     PA1     ------> ADC1_IN1
     PA2     ------> ADC1_IN2
     PA3     ------> ADC1_IN3
-    PA4     ------> ADC1_IN4 
+    PA4     ------> ADC1_IN4
+    PA5     ------> ADC1_IN5
+    PA6     ------> ADC1_IN6
+    PA7     ------> ADC1_IN7 
     */
-    HAL_GPIO_DeInit(GPIOA, Cell_4S_ADC_Pin|Cell_3S_ADC_Pin|Cell_2S_ADC_Pin|Cell_1S_ADC_Pin 
-                          |BAT_ADC_Pin);
+    HAL_GPIO_DeInit(GPIOA, Thermistor_1_ADC_Pin|Thermistor_2_ADC_Pin|Cell_1S_ADC_Pin|Cell_2S_ADC_Pin 
+                          |Cell_3S_ADC_Pin|Cell_4S_ADC_Pin|BAT_ADC_Pin|OS_ADC_Pin);
 
     /* ADC1 DMA DeInit */
     HAL_DMA_DeInit(hadc->DMA_Handle);
@@ -402,14 +408,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     PA11 [PA9]     ------> USART1_CTS
     PA12 [PA10]     ------> USART1_RTS 
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF1_USART1;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = GPIO_PIN_11;
+    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
